@@ -50,20 +50,18 @@ import { light, dark } from '/redux/features/themeSlice';
             })}
             </span>
             <Menu className='' style={{paddingTop:15}} theme="dark" mode="inline" defaultSelectedKeys={[keys]}>
-            
             <Menu.Item key="1" icon={<ProfileOutlined />}>
               <Link href="/dashboard"><a style={{textDecoration:'none'}}>Dashboard</a></Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<TeamOutlined />}>
               <Link href="/clients"><a style={{textDecoration:'none'}}>Clients</a></Link>
             </Menu.Item>
-
           </Menu>
         </Sider>
         <Layout className="site-layout" style={{backgroundColor:'grey'}}>
           <Header className={'dark-bg'}
           style={{ padding: 0}}>
-            
+            <span className='mx-5 f-35' style={{color:'white'}}>Welcome</span>
             <span className={'darkTheme'} style={{float:'right', marginRight:10, cursor:'pointer'}}>
               <CgDarkMode onClick={()=>{
                 if(theme=='dark'){
