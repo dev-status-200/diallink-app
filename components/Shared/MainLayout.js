@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux'
 import { light, dark } from '/redux/features/themeSlice';
 
+import { AiOutlineLogout } from "react-icons/ai";
+
   const { Header, Sider, Content } = Layout;
   
   const MainLayout = ({children}) => {
@@ -63,13 +65,15 @@ import { light, dark } from '/redux/features/themeSlice';
           style={{ padding: 0}}>
             <span className='mx-5 f-35' style={{color:'white'}}>Welcome</span>
             <span className={'darkTheme'} style={{float:'right', marginRight:10, cursor:'pointer'}}>
-              <CgDarkMode onClick={()=>{
-                if(theme=='dark'){
-                  dispatch(light()); Cookies.set('theme','light')
-                }else if(theme=='light'){
-                  dispatch(dark()); Cookies.set('theme','dark')
-                }
-              }}/>
+              <span className='mx-3 f-20' onClick={()=>{
+                Cookies.remove('username');
+                Cookies.remove('type');
+                Cookies.remove('token');
+                Cookies.remove('loginTime');
+                Cookies.remove('loginId');
+                Router.push('/signin');
+              }}>Logout <AiOutlineLogout style={{marginBottom:2}} /></span>
+              
             </span>
           </Header>
           <Content className={theme==='light'?'light-bg':'dark-bg'}

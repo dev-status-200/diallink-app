@@ -1,6 +1,7 @@
 @import 'layoutStyles.scss';
 @import 'lightTheme.scss';
 @import 'darkTheme.scss';
+@import 'signinStyles.scss';
 
 
 // Font Sizings 
@@ -41,3 +42,6 @@
     background: #555;
   }
   
+  .white{
+    color: whitesmoke;
+}

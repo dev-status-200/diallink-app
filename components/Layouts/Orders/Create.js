@@ -27,7 +27,7 @@ const Create = ({clientData}) => {
     const handleSubmit = (e) => {
         setLoad(true);
         e.preventDefault();
-        axios.post(process.env.NEXT_PUBLIC_SEANET_SYS_CREATE_ORDER_POST,{
+        axios.post(process.env.NEXT_PUBLIC_DIALLINK_SYS_CREATE_ORDER_POST,{
             CleintId:clientId,
             referenceInvoice:referenceInv,
             consignment:consignment,

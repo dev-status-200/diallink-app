@@ -1,26 +1,14 @@
-import React from 'react';
-import Router from 'next/router';
-import Cookies from 'cookies';
-import axios from 'axios';
-
-const dashboard = ({sessionData}) => {
-
-  React.useEffect(() => {
-    console.log(sessionData)
-    if(sessionData.isLoggedIn==false){
-        Router.push('/signin')
-    }
-    
-}, [sessionData])
-
+import React from 'react'
+import SignIn from '../components/Layouts/Signin'
+import axios from 'axios'
+import Cookies from 'cookies'
+export default function signin({sessionData}) {
   return (
-    <div>
-      dashboard
-    </div>
+    <>
+        <SignIn sessionData={sessionData} />
+    </>
   )
 }
-
-export default dashboard
 
 export async function getServerSideProps({req,res}) {
 

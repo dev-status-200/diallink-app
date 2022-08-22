@@ -1,11 +1,26 @@
 import React from 'react'
+import axios from 'axios'
+import Cookies from 'cookies'
+import Main from '../components/Layouts/Main'
 
-const index = () => {
-  return (
-    <div>
-        Home
-    </div>
-  )
+export default function Home({sessionData}) {
+
+
+  return (<Main sessionData={sessionData} />)
 }
 
-export default index
+export async function getServerSideProps({req,res}) {
+
+  const cookies = new Cookies(req, res)
+
+  const sessionRequest = await axios.get(process.env.NEXT_PUBLIC_DIALLINK_SYS_AUTHENTICATE_USER,{
+      headers:{
+          "x-access-token": `${cookies.get('token')}`
+      }
+    }).then((x)=>x.data)
+  
+  const sessionData = sessionRequest
+  return{
+      props: { sessionData: sessionData }
+  }
+}

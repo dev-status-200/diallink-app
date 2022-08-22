@@ -16,7 +16,7 @@ const Create = ({appendClient, setVisible}) => {
     const handleSubmit = (e) => {
         setLoad(true);
         e.preventDefault();
-        axios.post(process.env.NEXT_PUBLIC_SEANET_SYS_CREATE_CLIENT_POST,{
+        axios.post(process.env.NEXT_PUBLIC_DIALLINK_SYS_CREATE_CLIENT_POST,{
             name:name,
             contact:contact,
             address:address
