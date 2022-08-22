@@ -1,21 +1,13 @@
-import React from 'react';
-import Router from 'next/router';
+import React, { useEffect } from 'react';
 import Cookies from 'cookies';
 import axios from 'axios';
+import Dashboard from '/components/Layouts/dashboard';
 
 const dashboard = ({sessionData}) => {
 
-  React.useEffect(() => {
-    console.log(sessionData)
-    if(sessionData.isLoggedIn==false){
-        Router.push('/signin')
-    }
-    
-}, [sessionData])
-
   return (
     <div>
-      dashboard
+      <Dashboard sessionData={sessionData} />
     </div>
   )
 }

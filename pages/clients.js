@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Clients from '../components/Layouts/Clients';
 import Router from 'next/router';
 import Cookies from 'cookies';
@@ -6,17 +6,9 @@ import axios from 'axios';
 
 const clients = ({clientData, sessionData}) => {
 
-  React.useEffect(() => {
-    console.log(sessionData)
-    if(sessionData.isLoggedIn==false){
-        Router.push('/signin')
-    }
-    
-}, [sessionData])
-
   return (
     <div>
-      <Clients clientData={clientData} />
+      <Clients clientData={clientData} sessionData={sessionData} />
     </div>
   )
 }
