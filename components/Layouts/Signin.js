@@ -78,17 +78,17 @@ const SignIn = ({sessionData}) => {
                 {detailWarning===false && <div className='my-5'></div>}    
                 {detailWarning===true && 
                         <Alert variant="danger">
-                            Incorrect<strong> Email </strong>or <strong>Password</strong> !
+                            Incorrect<strong> Username </strong>or <strong>Password</strong> !
                         </Alert>
                     }
                 <Form onSubmit={login}>
                 <Row className="justify-content-md-center">
                     <Col md={12}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" required value={email} onChange={(e)=>setEmail(e.target.value)} />
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control type="text" placeholder="username" required value={email} onChange={(e)=>setEmail(e.target.value)} />
                         <Form.Text className="text-muted">
-                            We&apos;ll never share your email with anyone else.
+                            Enter the username provided by the organization.
                         </Form.Text>
                     </Form.Group>
                     </Col>
