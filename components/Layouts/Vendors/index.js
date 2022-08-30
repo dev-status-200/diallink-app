@@ -8,7 +8,7 @@ import { CloseCircleOutlined, EditOutlined, InfoCircleOutlined, StarOutlined } f
 import axios from 'axios';
 import View from './View';
 
-const Vendors = ({vendorData}) => {
+const Vendors = ({vendorData, unApprovedVendors}) => {
 
   const [ visible, setVisible ] = useState(false);
   const [ requestVisible, setRequestVisible ] = useState(false);
@@ -104,7 +104,7 @@ const Vendors = ({vendorData}) => {
         bodyStyle={{backgroundColor:theme=='light'?'white':'#162A46', borderRadius:1}}
         style={{color:theme=='light'?'black':'white'}}
       >
-        <View/>
+        <View unApprovedVendors={unApprovedVendors} />
       </Modal>
     </div>
   )
