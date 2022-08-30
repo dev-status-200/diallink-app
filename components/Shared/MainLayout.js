@@ -25,6 +25,7 @@ import { AiOutlineLogout } from "react-icons/ai";
       let value = '1';
         if(router.pathname === '/dashboard'){ value='1' }
         else if(router.pathname === '/clients'){ value='2' }
+        else if(router.pathname === '/vendors'){ value='3' }
         else { value='null' }
       return value
     }
@@ -57,6 +58,9 @@ import { AiOutlineLogout } from "react-icons/ai";
             </Menu.Item>
             <Menu.Item key="2" icon={<TeamOutlined />}>
               <Link href="/clients"><a style={{textDecoration:'none'}}>Clients</a></Link>
+            </Menu.Item>
+            <Menu.Item key="3" icon={<TeamOutlined />}>
+              <Link href="/vendors"><a style={{textDecoration:'none'}}>Vendors</a></Link>
             </Menu.Item>
           </Menu>
         </Sider>

@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import { Row, Col, Table } from 'react-bootstrap'
+import React, {useState, useEffect} from 'react';
+import { Row, Col, Table } from 'react-bootstrap';
 import { Modal } from 'antd';
 
 import { useSelector } from 'react-redux';
-
 import { CloseCircleOutlined, EditOutlined, InfoCircleOutlined, StarOutlined } from '@ant-design/icons';
-
 import Create from './Create';
 
 const Orders = ({clientData}) => {
@@ -37,7 +35,7 @@ const Orders = ({clientData}) => {
           <hr className='my-2' />
           </div>
           <div className='table-sm-1 mt-3'>
-              <Table className='tableFixHead'>
+            <Table className='tableFixHead'>
               <thead>
                 <tr>
                   <th>Sr.</th>
@@ -48,36 +46,36 @@ const Orders = ({clientData}) => {
                   <th>Modify</th>
                 </tr>
               </thead>
-              <tbody>
-              {/* {
-              clientList.map((x, index) => {
-              return (
-              <tr key={index} className='f'>
-                <td>{index + 1}</td>
-                <td>{x.name}</td>
-                <td>{x.contact}</td>
-                <td style={{maxWidth:200}}>{x.address}</td>
-                <td>
-                  <StarOutlined />
-                  <StarOutlined />
-                  <StarOutlined />
-                </td>
-                <td>
-                  <span>
-                    <InfoCircleOutlined className='modify-info'/>
-                  </span> <span className='mx-1'> | </span>
-                  <span>
-                    <EditOutlined className='modify-edit' />
-                  </span> <span className='mx-1'> | </span>
-                  <span>
-                    <CloseCircleOutlined className='modify-red'/>
-                  </span>
-                </td>
-              </tr>
-                )
-              })} */}
-              </tbody>
-              </Table>
+            <tbody>
+            {/* {
+            clientList.map((x, index) => {
+            return (
+            <tr key={index} className='f'>
+              <td>{index + 1}</td>
+              <td>{x.name}</td>
+              <td>{x.contact}</td>
+              <td style={{maxWidth:200}}>{x.address}</td>
+              <td>
+                <StarOutlined />
+                <StarOutlined />
+                <StarOutlined />
+              </td>
+              <td>
+                <span>
+                  <InfoCircleOutlined className='modify-info'/>
+                </span> <span className='mx-1'> | </span>
+                <span>
+                  <EditOutlined className='modify-edit' />
+                </span> <span className='mx-1'> | </span>
+                <span>
+                  <CloseCircleOutlined className='modify-red'/>
+                </span>
+              </td>
+            </tr>
+              )
+            })} */}
+            </tbody>
+            </Table>
           </div>
         </Row>
       </div>
