@@ -95,7 +95,7 @@ const SignIn = ({sessionData}) => {
                     <Col md={12}>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" required value={pass} onChange={(e)=>setPass(e.target.value)} />
+                        <Form.Control type="text" placeholder="Password" required value={pass} onChange={(e)=>setPass(e.target.value)} />
                     </Form.Group>
                     </Col>
                     <Col md={12}>

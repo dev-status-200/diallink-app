@@ -45,3 +45,31 @@
   .white{
     color: whitesmoke;
 }
+
+.searchList{
+  cursor: pointer;
+  margin-top: 12px;
+  background-color: rgba(226, 226, 226, 0.349);
+  border-radius: 5px;
+  padding: 8px;
+}
+.name{ font-size: 20px; }
+.address{ font-size: 12px; }
+
+.searchList:hover{
+  color: rgb(141, 141, 141);
+}
+
+
+.custom-btn{
+  background-color: white;
+  border: 1px solid rgb(6, 150, 172);
+  border-radius: 25px;
+  padding:8px 30px 8px 30px;
+  font-weight: 500;
+}
+.custom-btn:hover{
+  transition-duration: 300ms;
+  background-color: rgb(6, 150, 172);
+  color: white;
+}
