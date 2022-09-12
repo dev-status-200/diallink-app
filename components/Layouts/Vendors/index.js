@@ -18,7 +18,8 @@ const Vendors = ({vendorData, unApprovedVendors}) => {
   const [vendorList, setvendorList] = useState([]);
 
   useEffect(() => {
-    setvendorList(vendorData)
+    setvendorList(vendorData);
+    console.log(unApprovedVendors)
   }, []);
 
   const appendVendor = (x) => {
@@ -49,7 +50,6 @@ const Vendors = ({vendorData, unApprovedVendors}) => {
                 <th>City</th>
                 <th>Business Name</th>
                 <th>Postal Code</th>
-                <th>Street</th>
                 <th>Modify</th>
               </tr>
             </thead>
@@ -65,7 +65,6 @@ const Vendors = ({vendorData, unApprovedVendors}) => {
                 <td>{x.city}</td>
                 <td>{x.business_name}</td>
                 <td>{x.postal_code}</td>
-                <td>{x.street}</td>
                 <td>
                   <span>
                     <InfoCircleOutlined className='modify-info'

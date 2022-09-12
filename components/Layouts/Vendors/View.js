@@ -46,7 +46,6 @@ const View = ({unApprovedVendors, appendVendor}) => {
               <th>City</th>
               <th>Business Name</th>
               <th>Postal Code</th>
-              <th>Street</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -62,7 +61,6 @@ const View = ({unApprovedVendors, appendVendor}) => {
               <td>{x.city}</td>
               <td>{x.business_name}</td>
               <td>{x.postal_code}</td>
-              <td>{x.street}</td>
               <td>
                 <span>
                   <Popconfirm
