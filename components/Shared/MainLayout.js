@@ -17,6 +17,8 @@ import { AiOutlineLogout } from "react-icons/ai";
     const router = useRouter();
 
     const [collapsed, setCollapsed] = useState(false);
+    const [userName, setUserName] = useState('');
+    const [userType, setUserType] = useState('');
 
     const theme = useSelector((state) => state.theme.value)
     const dispatch = useDispatch();
@@ -26,7 +28,8 @@ import { AiOutlineLogout } from "react-icons/ai";
         if(router.pathname === '/dashboard'){ value='1' }
         else if(router.pathname === '/clients'){ value='2' }
         else if(router.pathname === '/vendors'){ value='3' }
-        else if(router.pathname === '/pay'){ value='4' }
+        else if(router.pathname === '/agents'){ value='4' }
+        else if(router.pathname === '/pay'){ value='5' }
         else { value='null' }
       return value
     }
@@ -43,6 +46,11 @@ import { AiOutlineLogout } from "react-icons/ai";
       console.log(theme)
     }, [Cookies.get('theme')]);
     
+    useEffect(()=>{
+      setUserName(Cookies.get('username'))
+      setUserType(Cookies.get('type'))
+    },[])
+
     return (
       <Layout className='layoutStyles'>
         <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -63,7 +71,11 @@ import { AiOutlineLogout } from "react-icons/ai";
             <Menu.Item key="3" icon={<TeamOutlined />}>
               <Link href="/vendors"><a style={{textDecoration:'none'}}>Vendors</a></Link>
             </Menu.Item>
+            {userType=='admin'&&
             <Menu.Item key="4" icon={<TeamOutlined />}>
+              <Link href="/agents"><a style={{textDecoration:'none'}}>Agents</a></Link>
+            </Menu.Item>}
+            <Menu.Item key="5" icon={<TeamOutlined />}>
               <Link href="/pay"><a style={{textDecoration:'none'}}>pay</a></Link>
             </Menu.Item>
           </Menu>
@@ -71,7 +83,7 @@ import { AiOutlineLogout } from "react-icons/ai";
         <Layout className="site-layout" style={{backgroundColor:'grey'}}>
           <Header className={'dark-bg'}
           style={{ padding: 0}}>
-            <span className='mx-5 f-35' style={{color:'white'}}>Welcome</span>
+            <span className='mx-5 f-35' style={{color:'white'}}>Welcome <span style={{fontSize:15}}>{userName} {"("}{userType}{")"}</span></span>
             <span className={'darkTheme'} style={{float:'right', marginRight:10, cursor:'pointer'}}>
               <span className='mx-3 f-20' onClick={()=>{
                 Cookies.remove('username');

@@ -1,0 +1,37 @@
+.agent-styles{
+    .user-box{
+        border: 1px solid silver;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 15px;
+    }
+    .user-box:hover{
+        cursor: pointer;
+        transition-duration: 350ms;
+        background-color: #E6E7E8;
+    }
+    .in-box-name{
+        font-size: 20px;
+    }
+    .in-box-desig{
+        font-weight: 200;
+        font-size: 14px;
+        line-height: 10px;
+    }
+    .profile{
+        border: 1px solid silver;
+        padding: 50px;
+        margin: 30px;
+        border-radius: 25px;
+        height: 80%;
+    }
+    .values{
+        font-size: 22px;
+        color:rgb(114, 114, 114);
+        font-weight: 300;
+    }
+    .values > span {
+        color: rgb(49, 49, 49);
+        font-weight: 500;
+    }
+}
