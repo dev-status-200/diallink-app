@@ -36,7 +36,7 @@ const Agents = ({agentData}) => {
             {
               agents.map((x, index)=>{
                 return(
-                  <div className='user-box' onClick={()=>setInfo(x)}>
+                  <div className='user-box' key={index} onClick={()=>setInfo(x)}>
                     <Row>
                       <Col md={3}><img src='user.png' height={50} width={50} /></Col>
                       <Col>
