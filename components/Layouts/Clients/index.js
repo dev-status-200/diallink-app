@@ -114,7 +114,7 @@ const Clients = ({clientData, sessionData, vendorData}) => {
         visible={venderVisible}
         onOk={() => setVenderVisible(false)}
         onCancel={() => setVenderVisible(false)}
-        //width={800}
+        width={800}
         footer={false}
         bodyStyle={{backgroundColor:theme=='light'?'white':'#162A46', borderRadius:1}}
         style={{color:theme=='light'?'black':'white'}}

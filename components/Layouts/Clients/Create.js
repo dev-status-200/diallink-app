@@ -16,7 +16,6 @@ const Create = ({appendClient, setVisible}) => {
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
-    const [street, setStreet] = useState('');
 
 
     const handleSubmit = (e) => {
@@ -27,14 +26,13 @@ const Create = ({appendClient, setVisible}) => {
             l_name:l_name,
             contact:contact,
             address_line:address,
-            street:street,
             city:city,
             zip:zip
         }).then((x)=>{
             appendClient(x.data);
             setLoad(false);
             setF_Name(''); setL_Name(''); setContact('');
-            setCity(''); setZip(''); setStreet(''); setAddress('');
+            setCity(''); setZip(''); setAddress('');
             setVisible(false);
         })
     }
@@ -74,12 +72,6 @@ const Create = ({appendClient, setVisible}) => {
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Zip Code</Form.Label>
           <Form.Control type="text" placeholder="zip" required value={zip} onChange={(e)=>setZip(e.target.value)} />
-        </Form.Group>
-        </Col>
-        <Col md={6}>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Street</Form.Label>
-          <Form.Control type="text" placeholder="Contact" required value={street} onChange={(e)=>setStreet(e.target.value)} />
         </Form.Group>
         </Col>
       </Row>

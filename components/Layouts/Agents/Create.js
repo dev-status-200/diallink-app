@@ -3,7 +3,7 @@ import {Row, Col, Form, Spinner } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
 import axios from 'axios'
 
-const Create = ({setRequestVisible}) => {  
+const Create = ({setRequestVisible, appendAgent}) => {  
 
     const theme = useSelector((state) => state.theme.value);
 
@@ -34,7 +34,7 @@ const Create = ({setRequestVisible}) => {
             password:password,
             type:type
         }).then((x)=>{
-            //appendClient(x.data);
+            appendAgent(x.data);
             setLoad(false);
             setF_Name(''); setL_Name(''); setContact('');
             setUsername(''); setPassword(''); setType(''); setAddress('');

@@ -18,8 +18,13 @@ const Agents = ({agentData}) => {
   useEffect(() => {
     console.log(agentData)
     setAgents(agentData)
-    
   },[])
+
+  const appendAgent = (x) => {
+    let tempState = [...agents];
+    tempState.unshift(x);
+    setAgents(tempState);
+  }
 
   return (
     <div className='agent-styles'>
@@ -79,7 +84,7 @@ const Agents = ({agentData}) => {
         //width={800}
         footer={false}
       >
-        <Create setRequestVisible={setRequestVisible} />
+        <Create setRequestVisible={setRequestVisible} appendAgent={appendAgent} />
       </Modal>
     </div>
   )
