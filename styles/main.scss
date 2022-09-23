@@ -74,3 +74,8 @@
   background-color: rgb(6, 150, 172);
   color: white;
 }
+.hover-table:hover{
+  cursor: pointer;
+  transition-duration: 300ms;
+  background-color: rgba(192, 192, 192, 0.212);
+}

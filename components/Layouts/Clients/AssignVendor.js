@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import {Row, Col, Form, Spinner } from 'react-bootstrap'
-import axios from 'axios'
+import React, {useState, useEffect} from 'react';
+import {Row, Col, Form, Spinner, Table } from 'react-bootstrap';
+import axios from 'axios';
+import { Popconfirm } from 'antd';
 
-const AssignVendor = () => {
+const AssignVendor = ({selectedClient}) => {
 
     const [searchLoad, setSearchLoad] = useState(false);
     const [city, setCity] = useState('');
@@ -12,25 +13,26 @@ const AssignVendor = () => {
 
   return (
     <div>
-      <h2>Search Venor</h2>
+      <h2>Search Venor for {selectedClient.f_name} {selectedClient.l_name}</h2>
+      <div>Addresss: <b>{selectedClient.address_line}</b></div>
       <hr/>
         <Row>
-          <Col md={6}>
+          <Col md={4}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Address</Form.Label>
               <Form.Control type="text" placeholder="Enter Address" value={search} onChange={(e)=>{ setSearch(e.target.value)}} />
             </Form.Group>
           </Col>
-          <Col md={6}>
+          <Col md={4}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>City</Form.Label>
-              <Form.Control type="text" placeholder="Enter City" value={city} onChange={(e)=>{ setCity(e.target.value)}} />
+              <Form.Control type="text" placeholder="Enter City" required value={city} onChange={(e)=>{ setCity(e.target.value)}} />
             </Form.Group>
           </Col>
-          <Col md={6}>
+          <Col md={4}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Service</Form.Label>
-              <Form.Control type="text" placeholder="Enter City" value={service} onChange={(e)=>{ setService(e.target.value)}} />
+              <Form.Control type="text" placeholder="Enter Service" value={service} onChange={(e)=>{ setService(e.target.value)}} />
             </Form.Group>
           </Col>
         </Row>
@@ -51,31 +53,49 @@ const AssignVendor = () => {
         }}>Go</button>
         <div>
           {searchLoad && <Spinner animation="border" className='m-3' size="md" />}
-          {!searchLoad && 
-            <div>
-              {vendorList.map((x, index)=>{
-                return(
-                <div className='searchList' key={index}>
-                    <h4 className=''>{x.business_name}</h4>{" "}
-                    <Row>
-                        <Col md={6}>
-                          <div><span className=''>Vendor Name: </span><span className='name'> {x.f_name} {x.l_name}</span></div>
-                          <div><span className=''>Services: </span><span className='name'> {x.services}</span></div>
-                        </Col>
-                        <Col md={6} className=''>
-                            <span>Address: </span><span className='name'>{x.address_line}</span><br/>
-                            <span className='address'>City: {x.city}</span>{" "}
-                            <span className='address'>ZIP: {x.postal_code}</span>
-                        </Col>
-                    </Row>
-                  
-                  
-                  
-                  
-                </div>
+          {
+            !searchLoad &&
+            <Table className='tableFixHead'>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Services</th>
+              </tr>
+            </thead>
+            <tbody>
+            {
+              vendorList.map((x, index) => {
+              return (
+                <Popconfirm
+                    title={()=> <span>Assign <b>{x.business_name}</b> ?</span>}
+                    onConfirm={()=>{
+                      axios.post(process.env.NEXT_PUBLIC_DIALLINK_SYS_ASSIGN_VENDOR_TO_CLIENT,{
+                        name:'',
+                        cost:'',
+                        clientId:selectedClient.id,
+                        vendorId:x.id
+                      }).then((x) => {
+                        console.log(x)
+                      })
+                    }}
+                    //onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                  <tr key={index} className='hover-table'>
+                  <td>{x.id}</td>
+                  <td>{x.business_name}</td>
+                  <td>{x.address_line}</td>
+                  <td>{x.services}</td>
+                </tr>
+                </Popconfirm>
                 )
-              })}
-            </div>
+              })
+            }
+            </tbody>
+            </Table>
           }
         </div>
     </div>

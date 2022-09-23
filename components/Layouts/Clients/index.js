@@ -17,6 +17,7 @@ const Clients = ({clientData, sessionData, vendorData}) => {
 
   const theme = useSelector((state) => state.theme.value);
   const [clientList, setClientList] = useState([]);
+  const [selectedClient, setSelectedClient] = useState({});
 
   useEffect(() => {
     if(clientData.length>0){
@@ -38,23 +39,23 @@ const Clients = ({clientData, sessionData, vendorData}) => {
     setClientList(tempState);
   }
 
-  const approveVendor = async(x) => {
-    setLoad(true);
-    await axios.post(process.env.NEXT_PUBLIC_DIALLINK_SYS_GET_APPROVE_VENDOR_POST,{id:x.id})
-    .then((y)=>{
-      if(y.data[0]==1){
-        let tempState = [...vendorList];
-        tempState = tempState.filter((y)=>{
-          return y.id!=x.id
-        })
-        setVendorList(tempState)
-        let returnState = x;
-        returnState.active=1;
-        appendVendor(x)
-        setLoad(false);
-      }
-    })
-  }
+  // const approveVendor = async(x) => {
+  //   setLoad(true);
+  //   await axios.post(process.env.NEXT_PUBLIC_DIALLINK_SYS_GET_APPROVE_VENDOR_POST,{id:x.id})
+  //   .then((y)=>{
+  //     if(y.data[0]==1){
+  //       let tempState = [...vendorList];
+  //       tempState = tempState.filter((y)=>{
+  //         return y.id!=x.id
+  //       })
+  //       setVendorList(tempState)
+  //       let returnState = x;
+  //       returnState.active=1;
+  //       appendVendor(x)
+  //       setLoad(false);
+  //     }
+  //   })
+  // }
 
   return (
     <div>
@@ -92,7 +93,7 @@ const Clients = ({clientData, sessionData, vendorData}) => {
               <td>
                 <span>
                   <InfoCircleOutlined className='modify-info' onClick={()=>{
-                    setVenderVisible(true);
+                    setSelectedClient(x);  setVenderVisible(true);
                   }} />
                 </span> <span className='mx-1'> | </span>
                 <span>
@@ -114,12 +115,12 @@ const Clients = ({clientData, sessionData, vendorData}) => {
         visible={venderVisible}
         onOk={() => setVenderVisible(false)}
         onCancel={() => setVenderVisible(false)}
-        width={800}
+        width={1000}
         footer={false}
         bodyStyle={{backgroundColor:theme=='light'?'white':'#162A46', borderRadius:1}}
         style={{color:theme=='light'?'black':'white'}}
       >
-        <AssignVendor/>
+        <AssignVendor selectedClient={selectedClient} />
       </Modal>
       <Modal 
         visible={visible}
