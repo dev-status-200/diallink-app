@@ -69,6 +69,7 @@ const AssignVendor = ({selectedClient}) => {
               vendorList.map((x, index) => {
               return (
                 <Popconfirm
+                  key={index}
                     title={()=> <span>Assign <b>{x.business_name}</b> ?</span>}
                     onConfirm={()=>{
                       axios.post(process.env.NEXT_PUBLIC_DIALLINK_SYS_ASSIGN_VENDOR_TO_CLIENT,{
@@ -84,7 +85,7 @@ const AssignVendor = ({selectedClient}) => {
                     okText="Yes"
                     cancelText="No"
                   >
-                  <tr key={index} className='hover-table'>
+                  <tr  className='hover-table'>
                   <td>{x.id}</td>
                   <td>{x.business_name}</td>
                   <td>{x.address_line}</td>
