@@ -1,25 +1,23 @@
 import React, {useState, useEffect} from 'react'
 import { Row, Col, Table } from 'react-bootstrap'
 import { Modal } from 'antd';
-
 import { useSelector } from 'react-redux';
-
 import Router from 'next/router';
-
 import { CloseCircleOutlined, EditOutlined, InfoCircleOutlined, StarOutlined } from '@ant-design/icons';
-import moment from 'moment'
+import moment from 'moment';
+import TasksPage from './TasksPage';
 
 const VendorAssigns = ({sessionData, assigningData}) => {
 
   const [ visible, setVisible ] = useState(false);
-  const [ venderVisible, setVenderVisible ] = useState(false);
 
   const theme = useSelector((state) => state.theme.value);
   const [assigningList, setAssigningList] = useState([]);
+  const [selectedAssign, setSelectedAssign] = useState({});
 
   useEffect(() => {
-    setAssigningList(assigningData)
-    console.log(assigningData)
+    setAssigningList(assigningData);
+    //console.log(assigningData)
   }, []);
   
   useEffect(() => {
@@ -40,7 +38,6 @@ const VendorAssigns = ({sessionData, assigningData}) => {
       <div className={theme=='light'?'lightTheme':'darkTheme'}>
         <Row className='box m-3'>
           <Col><h3 className='f my-2'>Vendor Assigns</h3></Col>
-          
           <div className='px-2'>
           <hr className='my-2' />
           </div>
@@ -60,7 +57,7 @@ const VendorAssigns = ({sessionData, assigningData}) => {
             {
             assigningList.map((x, index) => {
             return (
-            <tr key={index} className='f'>
+            <tr key={index} className='hover-table' onClick={()=>{setSelectedAssign(x); setVisible(true)}}>
               <td>{index + 1}</td>
               <td>{x.Client.f_name} {x.Client.l_name}</td>
               <td>{x.Vendor.f_name} {x.Vendor.l_name}</td>
@@ -75,17 +72,16 @@ const VendorAssigns = ({sessionData, assigningData}) => {
           </div>
         </Row>
       </div>
-
       <Modal 
         visible={visible}
         onOk={() => setVisible(false)}
         onCancel={() => setVisible(false)}
-        //width={800}
         footer={false}
+        width={800}
         bodyStyle={{backgroundColor:theme=='light'?'white':'#162A46', borderRadius:1}}
         style={{color:theme=='light'?'black':'white'}}
       >
-        Tasks
+        <TasksPage selectedAssign={selectedAssign} />
       </Modal>
     </div>
   )

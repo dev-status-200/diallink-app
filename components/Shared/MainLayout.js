@@ -1,4 +1,4 @@
-import { TeamOutlined, AlignLeftOutlined, ProfileOutlined, SolutionOutlined } from '@ant-design/icons';
+import { TeamOutlined, AlignLeftOutlined, ProfileOutlined, SolutionOutlined, FileAddOutlined, SettingOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
@@ -68,14 +68,14 @@ import { AiOutlineLogout } from "react-icons/ai";
             <Menu.Item key="2" icon={<TeamOutlined />}>
               <Link href="/clients"><a style={{textDecoration:'none'}}>Clients</a></Link>
             </Menu.Item>
-            <Menu.Item key="3" icon={<TeamOutlined />}>
+            <Menu.Item key="3" icon={<SettingOutlined />}>
               <Link href="/vendors"><a style={{textDecoration:'none'}}>Vendors</a></Link>
             </Menu.Item>
             {userType=='admin'&&
             <Menu.Item key="4" icon={<TeamOutlined />}>
               <Link href="/agents"><a style={{textDecoration:'none'}}>Agents</a></Link>
             </Menu.Item>}
-            <Menu.Item key="5" icon={<TeamOutlined />}>
+            <Menu.Item key="5" icon={<FileAddOutlined />}>
               <Link href="/vendorAssigns"><a style={{textDecoration:'none'}}>Vendor Assigns</a></Link>
             </Menu.Item>
           </Menu>
