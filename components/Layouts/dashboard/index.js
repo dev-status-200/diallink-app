@@ -1,5 +1,8 @@
 import React,{ useEffect } from 'react'
 import Router from 'next/router';
+import io from "socket.io-client";
+
+const socket = io.connect("http://localhost:8080");
 
 const Dashboard = ({sessionData}) => {
 
@@ -11,9 +14,18 @@ const Dashboard = ({sessionData}) => {
         
     }, [sessionData])
 
+    const sendMessage = () => {
+      socket.emit("send_message", {message:'Hello'});
+    };
+    useEffect(()=>{
+      socket.on("receive_message", (data) => {
+        console.log(data);
+      });
+    },[socket])
+
   return (
     <div>
-      Dashboard
+      <button onClick={sendMessage}>click</button>
     </div>
   )
 }
