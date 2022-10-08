@@ -26,10 +26,9 @@ import { AiOutlineLogout } from "react-icons/ai";
     const values = () => {
       let value = '1';
         if(router.pathname === '/dashboard'){ value='1' }
-        else if(router.pathname === '/clients'){ value='2' }
-        else if(router.pathname === '/vendors'){ value='3' }
-        else if(router.pathname === '/agents'){ value='4' }
-        else if(router.pathname === '/vendorAssigns'){ value='5' }
+        else if(router.pathname === '/vendors'){ value='2' }
+        else if(router.pathname === '/agents'){ value='3' }
+        else if(router.pathname === '/vendorAssigns'){ value='4' }
         else { value='null' }
       return value
     }
@@ -65,18 +64,15 @@ import { AiOutlineLogout } from "react-icons/ai";
             <Menu.Item key="1" icon={<ProfileOutlined />}>
               <Link href="/dashboard"><a style={{textDecoration:'none'}}>Dashboard</a></Link>
             </Menu.Item>
-            <Menu.Item key="2" icon={<TeamOutlined />}>
-              <Link href="/clients"><a style={{textDecoration:'none'}}>Clients</a></Link>
-            </Menu.Item>
-            <Menu.Item key="3" icon={<SettingOutlined />}>
+            <Menu.Item key="2" icon={<SettingOutlined />}>
               <Link href="/vendors"><a style={{textDecoration:'none'}}>Vendors</a></Link>
             </Menu.Item>
             {userType=='admin'&&
-            <Menu.Item key="4" icon={<TeamOutlined />}>
+            <Menu.Item key="3" icon={<TeamOutlined />}>
               <Link href="/agents"><a style={{textDecoration:'none'}}>Agents</a></Link>
             </Menu.Item>}
-            <Menu.Item key="5" icon={<FileAddOutlined />}>
-              <Link href="/vendorAssigns"><a style={{textDecoration:'none'}}>Vendor Assigns</a></Link>
+            <Menu.Item key="4" icon={<FileAddOutlined />}>
+              <Link href="/vendorAssigns"><a style={{textDecoration:'none'}}>Calls</a></Link>
             </Menu.Item>
           </Menu>
         </Sider>

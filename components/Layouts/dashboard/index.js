@@ -1,31 +1,25 @@
-import React,{ useEffect } from 'react'
+import React,{ useEffect, useState } from 'react'
 import Router from 'next/router';
 import io from "socket.io-client";
-
-const socket = io.connect("http://localhost:8080");
+import Agent from './Agent';
+import Admin from './Admin';
+import Cookies from 'js-cookie'
 
 const Dashboard = ({sessionData}) => {
 
-    useEffect(() => {
-        console.log(sessionData)
-        if(sessionData.isLoggedIn==false){
-            Router.push('/signin')
-        }
-        
-    }, [sessionData])
+  const [isAdmin, setIsAdmin] = useState(false)
 
-    const sendMessage = () => {
-      socket.emit("send_message", {message:'Hello'});
+  useEffect(() => {
+    if(Cookies.get('type')=='admin'){
+      setIsAdmin(true)
+    }
+    return () => {
     };
-    useEffect(()=>{
-      socket.on("receive_message", (data) => {
-        console.log(data);
-      });
-    },[socket])
-
+  }, [])
   return (
     <div>
-      <button onClick={sendMessage}>click</button>
+      {isAdmin && <Admin/>}
+      {!isAdmin && <Agent/>}
     </div>
   )
 }

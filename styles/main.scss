@@ -49,16 +49,16 @@
 
 .searchList{
   cursor: pointer;
-  margin-top: 12px;
-  background-color: rgba(226, 226, 226, 0.349);
-  border-radius: 5px;
-  padding: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid silver;
 }
 .name{ font-size: 20px; }
 .address{ font-size: 12px; }
 
 .searchList:hover{
-  color: rgb(141, 141, 141);
+  transition-duration: 300ms;
+  background-color: rgba(85, 85, 85, 0.11);
 }
 
 
