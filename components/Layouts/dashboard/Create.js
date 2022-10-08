@@ -148,7 +148,7 @@ const Create = () => {
             {!vendorLoad &&
                 vendorList.map((x,index)=>{
                     return(
-                        <Col md={12} className='searchList'>
+                        <Col md={12} className='searchList' key={index}>
                             <Form.Check style={{float:'right'}} type={'checkbox'} id={`default-`}/>
                             <div style={{fontSize:22, fontWeight:500}}>{x.f_name} {x.l_name}</div>
                             <div style={{fontSize:16}}>{x.address_line}</div>
