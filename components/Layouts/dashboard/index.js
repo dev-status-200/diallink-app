@@ -5,7 +5,7 @@ import Agent from './Agent';
 import Admin from './Admin';
 import Cookies from 'js-cookie'
 
-const Dashboard = ({sessionData}) => {
+const Dashboard = ({sessionData, callsData}) => {
 
   const [isAdmin, setIsAdmin] = useState(false)
 
@@ -19,7 +19,7 @@ const Dashboard = ({sessionData}) => {
   return (
     <div>
       {isAdmin && <Admin/>}
-      {!isAdmin && <Agent/>}
+      {!isAdmin && <Agent callsData={callsData} />}
     </div>
   )
 }
