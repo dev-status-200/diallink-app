@@ -11,7 +11,6 @@ const dashboard = ({sessionData, callsData}) => {
     </div>
   )
 }
-
 export default dashboard
 
 export async function getServerSideProps({req,res}) {

@@ -3,7 +3,7 @@ import Router from 'next/router';
 import io from "socket.io-client";
 import Agent from './Agent';
 import Admin from './Admin';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 const Dashboard = ({sessionData, callsData}) => {
 
@@ -13,9 +13,9 @@ const Dashboard = ({sessionData, callsData}) => {
     if(Cookies.get('type')=='admin'){
       setIsAdmin(true)
     }
-    return () => {
-    };
-  }, [])
+    return () => { };
+  }, []);
+
   return (
     <div>
       {isAdmin && <Admin/>}
