@@ -4,11 +4,13 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Cookies from 'js-cookie'
 
-const Create = ({appendCall, setVisible, edit}) => {
+const Edit = ({selectedCall, setEditVisible, updateCall, setSelectedCall}) => {
 
+    const [serviceLoad, setServiceLoad] = useState(false);
     const [load, setLoad] = useState(false);
     const [vendorLoad, setVendorLoad] = useState(false);
 
+    const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [contact, setContact] = useState('');
     const [city, setCity] = useState('');
@@ -22,16 +24,32 @@ const Create = ({appendCall, setVisible, edit}) => {
     const [selectedVendor, setSelectedVendor] = useState({});
 
     useEffect(() => {
+        setServiceLoad(true)
+        console.log(selectedCall)
         axios.get(process.env.NEXT_PUBLIC_DIALLINK_GET_SERVICES).then((x)=>{
-            console.log(x.data);
             let tempService = []
             x.data.map((y)=>{
                 tempService.push({id:y.id, label:y.name, check:false})
             })
+            setId(selectedCall.id)
+            setName(selectedCall.customer)
+            setCity(selectedCall.city)
+            setAddress(selectedCall.address)
+            setContact(selectedCall.contact)
+            setEmail(selectedCall.email)
+            //let tempState = [...services]
+            selectedCall.tasks.split(", ").forEach((x)=>{
+                tempService.forEach((y)=>{
+                    if(y.label==x){
+                        y.check=true;
+                    }
+                })
+            })
             setServices(tempService)
+            setServiceLoad(false)
         })
       return () => { }
-    }, [])
+    }, [selectedCall])
 
     const handleSubmit = async(e) => {
         setLoad(true);
@@ -46,15 +64,20 @@ const Create = ({appendCall, setVisible, edit}) => {
                 }
             }
         })
-        await axios.post(process.env.NEXT_PUBLIC_DIALLINK_POST_CREATE_CALL,{
-            name:name, contact:contact, city:city, address:address,
+        await axios.post(process.env.NEXT_PUBLIC_DIALLINK_POST_RE_CREATE_CALL,{
+            id:id, name:name, contact:contact, city:city, address:address,
             VendorId:selectedVendor.id, UserId:Cookies.get('loginId'), email:email,
-            description:desc, services:selectedServices, status:Object.keys(selectedVendor).length>0?1:0,
+            services:selectedServices, status:Object.keys(selectedVendor).length>0?1:0,
         }).then(async(x)=>{
-            if(x.status==200){
-                appendCall(x.data);
-                setVisible(false);
-
+            if(x.data[0]==1){
+                setEditVisible(false);
+                setVendorList([])
+                updateCall(
+                    {
+                        id:id, status:Object.keys(selectedVendor).length>0?1:0,
+                        VendorId:selectedVendor.id, Vendor:{id:selectedVendor.id, f_name:selectedVendor.f_name, l_name:selectedVendor.l_name}
+                    }
+                    )
                 await axios.post(process.env.NEXT_PUBLIC_DIALLINK_SEND_NOTIFICATION,{
                     devices:[selectedVendor.device_id],
                     heading:"Upcoming Call!",
@@ -92,7 +115,7 @@ const Create = ({appendCall, setVisible, edit}) => {
     <div>
     <div className='f-30'>New Call</div>
     <hr/>
-    <Row>
+    {!serviceLoad && <Row>
     <Col md={7}>
     <Form className='' onSubmit={handleSubmit}>
         <Row>
@@ -170,7 +193,7 @@ const Create = ({appendCall, setVisible, edit}) => {
                     })
                     setVendorList(tempCheck)
                 }}>
-                    <Form.Check style={{float:'right'}} type={'checkbox'} checked={x.check?true:false} />
+                    <Form.Check style={{float:'right'}} type={'checkbox'} checked={x.check?true:false} onChange={()=>{}} />
                     <div style={{fontSize:22,fontWeight:500}}>{x.f_name} {x.l_name}</div>
                     <div style={{fontSize:15}}>{x.address_line}</div>
                     <div style={{fontSize:16}}><span style={{fontWeight:500}}>Contact: </span>{x.contact}</div>
@@ -182,9 +205,10 @@ const Create = ({appendCall, setVisible, edit}) => {
     </Row>
     </Col>
     </Row>
-        
+    }
+    {serviceLoad && <div style={{textAlign:'center'}}><Spinner animation="border" className='mx-3'  size="xl" /></div>}
     </div>
   )
 }
 
-export default Create
+export default Edit
