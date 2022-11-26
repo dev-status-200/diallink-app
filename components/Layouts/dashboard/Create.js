@@ -9,6 +9,8 @@ const Create = ({appendCall, setVisible, edit}) => {
     const [load, setLoad] = useState(false);
     const [vendorLoad, setVendorLoad] = useState(false);
 
+    const [allVendor, setAllVendor] = useState(false);
+
     const [name, setName] = useState('');
     const [contact, setContact] = useState('');
     const [city, setCity] = useState('');
@@ -77,7 +79,8 @@ const Create = ({appendCall, setVisible, edit}) => {
         axios.post(process.env.NEXT_PUBLIC_DIALLINK_SYS_SEARCH_VENDOR_POST,{
             city:city,
             services:tempServices,
-            address:searchAddress
+            address:searchAddress,
+            allVendor:allVendor
         }).then((x) => {
             let tempVendor = [];
             x.data.forEach((y) => {
@@ -153,6 +156,7 @@ const Create = ({appendCall, setVisible, edit}) => {
     <Col md={5}>
     <Row>
         <Col md={12}><h5 className='mt-1'>Search Vendors</h5></Col>
+        <Col md={12}><Form.Check type="checkbox" checked={allVendor} onChange={()=>setAllVendor(!allVendor)} label="Get All" /></Col>
         <Col md={6}><Form.Control placeholder="Any Similar Place" value={searchAddress} onChange={(e)=>setSearchAddress(e.target.value)} /></Col>
         <Col md={6}><button className='custom-btn' onClick={searchVendor}>Search</button></Col>
         <Col md={12}><hr className='mt-2'/></Col>

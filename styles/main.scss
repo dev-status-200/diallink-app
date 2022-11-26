@@ -79,3 +79,31 @@
   transition-duration: 300ms;
   background-color: rgba(192, 192, 192, 0.212);
 }
+
+.completeCalls{
+  background-color: rgb(30, 112, 30);
+  min-height: 100px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white!important;
+  padding: 20px;
+}
+.cancelCalls{
+  background-color: rgb(123, 43, 33);
+  min-height: 100px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white!important;
+  padding: 20px;
+}
+.ongoingCalls{
+  background-color: rgb(23, 73, 114);
+  min-height: 100px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  color: white!important;
+  padding: 20px;
+}
+.wh{
+  color: #f1f1f1!important;
+}
