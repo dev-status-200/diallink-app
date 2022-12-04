@@ -81,6 +81,7 @@
 }
 
 .completeCalls{
+  cursor: pointer;
   background-color: rgb(30, 112, 30);
   min-height: 100px;
   border: 1px solid grey;
@@ -88,7 +89,11 @@
   color: white!important;
   padding: 20px;
 }
+.completeCalls:hover{
+  background-color: rgb(16, 53, 16);
+}
 .cancelCalls{
+  cursor: pointer;
   background-color: rgb(123, 43, 33);
   min-height: 100px;
   border: 1px solid grey;
@@ -96,13 +101,20 @@
   color: white!important;
   padding: 20px;
 }
+.cancelCalls:hover{
+  background-color: rgb(72, 27, 21);
+}
 .ongoingCalls{
+  cursor: pointer;
   background-color: rgb(23, 73, 114);
   min-height: 100px;
   border: 1px solid grey;
   border-radius: 10px;
   color: white!important;
   padding: 20px;
+}
+.ongoingCalls:hover{
+  background-color: rgb(16, 44, 66);
 }
 .wh{
   color: #f1f1f1!important;
