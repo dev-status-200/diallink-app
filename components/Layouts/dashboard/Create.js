@@ -160,6 +160,7 @@ const Create = ({appendCall, setVisible, edit}) => {
         <Col md={6}><Form.Control placeholder="Any Similar Place" value={searchAddress} onChange={(e)=>setSearchAddress(e.target.value)} /></Col>
         <Col md={6}><button className='custom-btn' onClick={searchVendor}>Search</button></Col>
         <Col md={12}><hr className='mt-2'/></Col>
+        <div style={{maxHeight:500, overflowY:'auto'}}>
         {!vendorLoad &&
             vendorList.map((x,index)=>{
             return(
@@ -181,6 +182,7 @@ const Create = ({appendCall, setVisible, edit}) => {
                 </Col>
             )})
         }
+        </div>
         { vendorLoad && <Spinner className='my-3 mx-3' animation="border" size="bg" /> }
         { vendorList.length==0 && <h6><hr/>No Vendor Found</h6> }
     </Row>
