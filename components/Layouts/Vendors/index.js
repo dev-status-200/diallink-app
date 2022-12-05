@@ -98,7 +98,6 @@ const Vendors = ({vendorData, unApprovedVendors}) => {
         bodyStyle={{backgroundColor:theme=='light'?'white':'#162A46', borderRadius:1}}
         style={{color:theme=='light'?'black':'white'}}
       >
-        Request View
       </Modal>
       <Modal 
         visible={requestVisible}

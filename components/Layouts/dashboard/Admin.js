@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Table } from 'react-bootstrap'
-import moment from 'moment'
+import { Row, Col, Table } from 'react-bootstrap';
+import moment from 'moment';
+import { CloseCircleOutlined, EditOutlined, InfoCircleOutlined, StarOutlined } from '@ant-design/icons';
+import { Popconfirm } from 'antd';
+import axios from 'axios';
 
 const Admin = ({adminCallsData}) => {
   const [ calls, setCalls ] = useState({
@@ -9,7 +12,7 @@ const Admin = ({adminCallsData}) => {
     ongoing:0,
   });
   const [ status, setStatus ] = useState('');
-
+  const [records, setRecords] = useState([])
   useEffect(() => {
     console.log(adminCallsData)
     let complete = 0
@@ -27,16 +30,29 @@ const Admin = ({adminCallsData}) => {
         cancel = cancel + 1
       }
     });
-
     setCalls({
       complete:complete,
       cancel:cancel,
       ongoing:ongoing,
     })
-    
+    setRecords(adminCallsData);
     return () => { };
   }, [])
-  
+
+  const deleteCall = async(data) => {
+    await axios.post(process.env.NEXT_PUBLIC_DIALLINK_POST_DELETE_CALLS,{
+      data
+    }).then((x)=>{
+      if(x.data.result){
+        let tempState = [...records];
+        tempState = tempState.filter((x)=>{
+          return x.id!=data.id
+        })
+        setRecords(tempState)
+      }
+    })
+  }
+
   return (
     <div>
       <div className={''}>
@@ -72,10 +88,11 @@ const Admin = ({adminCallsData}) => {
                 <th>Assigned Vendor</th>
                 <th>Created</th>
                 <th>Agent</th>
+                <th>Modify</th>
               </tr>
             </thead>
             <tbody>
-            {adminCallsData.filter((x)=>{
+            {records.filter((x)=>{
                 if(status==''){
                   return x
                 }else{
@@ -102,6 +119,20 @@ const Admin = ({adminCallsData}) => {
                   {x.User.f_name}
                   {" "}
                   {x.User.l_name}
+                </td>
+                <td className='px-4'>
+                  <span>
+                  <Popconfirm
+                    title="Delete This Call?"
+                    onConfirm={()=>{deleteCall(x)}}
+                    //onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                  <CloseCircleOutlined className='modify-red'/>
+                </Popconfirm>
+                    
+                  </span>
                 </td>
               </tr>
                 )

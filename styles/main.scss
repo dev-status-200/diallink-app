@@ -119,3 +119,9 @@
 .wh{
   color: #f1f1f1!important;
 }
+
+.modify-red:hover{
+  transition-duration: 300ms;
+  cursor: pointer;
+  color: rgb(193, 29, 29);
+}

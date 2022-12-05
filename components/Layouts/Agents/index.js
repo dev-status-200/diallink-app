@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Table } from 'react-bootstrap'
 import { Modal } from 'antd';
 import Create from './Create';
+import Edit from './Edit';
 import Router, {useRouter} from 'next/router';
+import { CloseCircleOutlined, EditOutlined, InfoCircleOutlined, StarOutlined } from '@ant-design/icons';
 
 const Agents = ({agentData}) => {
 
@@ -10,13 +12,14 @@ const Agents = ({agentData}) => {
 
   const [requestVisible, setRequestVisible] = useState(false)
   const [agents, setAgents] = useState([]);
+  const [edit, setEdit] = useState(false);
+
   const [info, setInfo] = useState({
     f_name:'', l_name:'', username:'', contact:'',
     address:'', password:'', type:'' 
   });
 
   useEffect(() => {
-    console.log(agentData)
     setAgents(agentData)
   },[])
 
@@ -57,7 +60,16 @@ const Agents = ({agentData}) => {
         </Col>
         <Col md={8}>
          <div className='profile'>
+          <Row>
+            <Col>
             <img src={'/user.png'} height={100} />
+            </Col>
+            <Col>
+            <EditOutlined onClick={()=>{
+              setEdit(true);
+            }} style={{fontSize:25, position:'absolute', right:'10%', cursor:'pointer'}} />
+            </Col>
+          </Row>
             <Row className='my-3'>
               <Col>
                 <div>General Info</div>
@@ -77,14 +89,23 @@ const Agents = ({agentData}) => {
          </div>
         </Col>
       </Row>
+
       <Modal 
         visible={requestVisible}
         onOk={() => setRequestVisible(false)}
         onCancel={() => setRequestVisible(false)}
-        //width={800}
         footer={false}
       >
         <Create setRequestVisible={setRequestVisible} appendAgent={appendAgent} />
+      </Modal>
+
+      <Modal 
+        visible={edit}
+        onOk={() => setEdit(false)}
+        onCancel={() => setEdit(false)}
+        footer={false}
+      >
+        <Edit info={info} />
       </Modal>
     </div>
   )
