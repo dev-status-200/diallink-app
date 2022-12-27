@@ -37,6 +37,7 @@ const Edit = ({selectedCall, setEditVisible, updateCall, setSelectedCall}) => {
             setAddress(selectedCall.address)
             setContact(selectedCall.contact)
             setEmail(selectedCall.email)
+            setDesc(selectedCall.description)
             //let tempState = [...services]
             selectedCall.tasks.split(", ").forEach((x)=>{
                 tempService.forEach((y)=>{
@@ -65,7 +66,7 @@ const Edit = ({selectedCall, setEditVisible, updateCall, setSelectedCall}) => {
             }
         })
         await axios.post(process.env.NEXT_PUBLIC_DIALLINK_POST_RE_CREATE_CALL,{
-            id:id, name:name, contact:contact, city:city, address:address,
+            id:id, name:name, contact:contact, city:city, address:address, desc:desc,
             VendorId:selectedVendor.id, UserId:Cookies.get('loginId'), email:email,
             services:selectedServices, status:Object.keys(selectedVendor).length>0?1:0,
         }).then(async(x)=>{

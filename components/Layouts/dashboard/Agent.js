@@ -119,9 +119,6 @@ const Agent = ({callsData}) => {
                         setEditVisible(true);}
                       }}>
                     <EditOutlined className='modify-edit' />
-                  </span> <span className='mx-1'> | </span>
-                  <span>
-                    <CloseCircleOutlined className='modify-red'/>
                   </span>
                 </td>
               </tr>
