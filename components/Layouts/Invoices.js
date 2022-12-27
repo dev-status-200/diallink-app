@@ -1,9 +1,13 @@
+import { CloseCircleOutlined, EditOutlined, InfoCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Table } from 'react-bootstrap';
+import { Popconfirm } from 'antd';
+import axios from 'axios';
+import Router from 'next/router'
 
 const Invoices = ({invoiceData}) => {
 
-  const [ records, setRecords ] = useState([])
+  const [ records, setRecords ] = useState([]);
 
   useEffect(() => {
     let tempState = [...invoiceData];
@@ -38,6 +42,23 @@ const Invoices = ({invoiceData}) => {
     setRecords(tempState);
   }, []);
   
+  const enable = async(id, device_id) => {
+    await axios.post(process.env.NEXT_PUBLIC_DIALLINK_POST_ENABLE_VENDOR,{
+      id:id, device_id:device_id
+    }).then((x)=>{
+      alert("Vendor Enabled!");
+      Router.push('/invoices')
+    })
+  }
+  const disable = async(id, device_id) => {
+    await axios.post(process.env.NEXT_PUBLIC_DIALLINK_POST_DISABLE_VENDOR,{
+      id:id, device_id:device_id
+    }).then((x)=>{
+      alert("Vendor Disabled!");
+      Router.push('/invoices')
+    })
+  }
+
   return (
     <div className='box m-3'>
       <Row className='p-2'>
@@ -55,13 +76,14 @@ const Invoices = ({invoiceData}) => {
                 <th>Email</th>
                 <th>Pending</th>
                 <th>Paid</th>
+                <th>Modify</th>
               </tr>
             </thead>
             <tbody>
             {
               records.map((x, index) => {
               return (
-              <tr key={index} className='f' >
+              <tr key={index} className='f' style={{backgroundColor:x.active==0?'#e6bcbc':'white'}}>
                 <td>{index+1}</td>
                 <td>{x.f_name} {x.l_name}</td>
                 <td>{x.business_name}</td>
@@ -74,6 +96,26 @@ const Invoices = ({invoiceData}) => {
                 <td>
                   <div>Calls: <span style={{color:'blue'}}>{x.paidInvoices}</span></div>
                   <div>Rs. <span style={{color:'green'}}>{x.amountPaid}</span></div>
+                </td>
+                <td>
+                  <Popconfirm className='m-2'
+                      title="Disable This Vendor?"
+                      onConfirm={x.active==1?()=>disable(x.id, x.device_id):()=>console.log('vendor Not Active')}
+                      //onCancel={cancel}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                    <CloseCircleOutlined className='modify-info' style={{color:x.active==1?'red':'grey'}} />
+                  </Popconfirm>
+                  <Popconfirm className='m-2'
+                      title="Enable This Vendor?"
+                      onConfirm={x.active==0?()=>enable(x.id, x.device_id):()=>console.log('vendor Not Active')}
+                      //onCancel={cancel}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                    <CheckCircleOutlined className='modify-info' style={{color:x.active==0?'green':'grey'}} />
+                  </Popconfirm>
                 </td>
               </tr>
                 )
