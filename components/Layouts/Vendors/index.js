@@ -15,11 +15,10 @@ const Vendors = ({vendorData, unApprovedVendors}) => {
   
   const theme = useSelector((state) => state.theme.value);
 
-  const [vendorList, setvendorList] = useState([]);
+  const [vendorList, setvendorList] = useState([{Call_Track:{calls:'0', accepted:'0'}}]);
 
   useEffect(() => {
     setvendorList(vendorData);
-    console.log(unApprovedVendors)
   }, []);
 
   const appendVendor = (x) => {
@@ -27,6 +26,7 @@ const Vendors = ({vendorData, unApprovedVendors}) => {
     tempState.unshift(x);
     setvendorList(tempState);
   }
+
 
   return (
     <div>
@@ -47,6 +47,7 @@ const Vendors = ({vendorData, unApprovedVendors}) => {
                 <th>Name</th>
                 <th>Contact</th>
                 <th>Address</th>
+                <th>Calls</th>
                 <th>City</th>
                 <th>Business Name</th>
                 <th>Postal Code</th>
@@ -61,7 +62,11 @@ const Vendors = ({vendorData, unApprovedVendors}) => {
                 <td>{index + 1}</td>
                 <td>{x.f_name} {x.l_name}</td>
                 <td>{x.contact}</td>
-                <td>{x.address_line}</td>
+                <td style={{maxWidth:170}}>{x.address_line}</td>
+                <td>
+                  <div style={{color:'blue'}}>Assigned: {x.Call_Track.calls}</div>
+                  <div style={{color:'green'}}>Accepted: {x.Call_Track.accepted}</div>
+                </td>
                 <td>{x.city}</td>
                 <td>{x.business_name}</td>
                 <td>{x.postal_code}</td>
